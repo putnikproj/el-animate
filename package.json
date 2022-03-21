@@ -1,0 +1,33 @@
+{
+  "name": "el-animate",
+  "version": "1.0.0",
+  "description": "Tool for adding enter/leave hardware accelerated animation by controling css clases",
+  "main": "src/package/el-animate.js",
+  "browserslist": "> 2%, not dead",
+  "scripts": {
+    "dev": "webpack serve --mode=development",
+    "build": "webpack --mode=production",
+    "build:dev": "webpack --mode=development",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix",
+    "prettier": "prettier . --check",
+    "prettier:fix": "prettier . --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.30.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.2",
+    "webpack": "^5.42.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

@@ -1,0 +1,86 @@
+/* Block with animation */
+
+.block {
+  display: inline-block;
+  padding: 30px;
+  background-color: lightseagreen;
+  transform: translateX(150px);
+  transition: transform 0.3s;
+}
+
+.block:hover {
+  transform: scale(1.1) translateX(150px);
+}
+
+.block.enter-from {
+  transform: translateX(0);
+}
+
+.block.enter-active {
+  animation: show 1s forwards ease-in-out;
+}
+
+.block.leave-to {
+  transform: translateX(0);
+}
+
+.block.leave-active {
+  animation: show 1s forwards reverse ease-in-out;
+}
+
+@keyframes show {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(150px);
+  }
+}
+
+/* Block with transition */
+
+.block2 {
+  display: inline-block;
+  padding: 30px;
+  margin-top: 20px;
+  background-color: CornflowerBlue;
+  transform: translateX(150px);
+}
+
+.block2.enter-from {
+  transform: translateX(-20px);
+}
+
+/* .block2.enter-to {
+  transform: translateX(250px);
+} */
+
+.block2.enter-active {
+  transition: transform 2s ease-in-out;
+}
+
+/* .block2.leave-from {
+  transform: translateX(250px);
+} */
+
+.block2.leave-to {
+  transform: translateX(-100px);
+}
+
+.block2.leave-active {
+  transition: transform 1s ease-in-out;
+}
+
+/* Button */
+
+button {
+  margin-bottom: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.shown {
+  outline: 1px solid black;
+}
