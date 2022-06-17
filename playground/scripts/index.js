@@ -1,5 +1,5 @@
 /* eslint-disable no-return-assign */
-import * as ELAnimate from './package/el-animate';
+import * as ELAnimate from '../../src/el-animate';
 
 // Buttons
 const changeButton = document.querySelector('.change-button');
