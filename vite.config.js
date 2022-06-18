@@ -1,0 +1,17 @@
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
+
+const LIB_NAME = 'ElAnimate';
+
+export default defineConfig({
+  root: './playground',
+  build: {
+    outDir: '../dist',
+    emptyOutDir: true,
+    lib: {
+      entry: resolve(__dirname, 'src/el-animate.js'),
+      formats: ['cjs', 'es', 'iife', 'umd'],
+      name: LIB_NAME,
+    },
+  },
+});

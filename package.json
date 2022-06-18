@@ -1,17 +1,28 @@
 {
   "name": "el-animate",
-  "version": "1.0.0",
+  "version": "0.0.1",
+  "private": true,
   "description": "Tool for adding enter/leave hardware accelerated animation by controling css clases",
-  "main": "src/package/el-animate.js",
+  "main": "./dist/el-animate.umd.js",
+  "module": "./dist/el-animate.es.js",
   "browserslist": "> 2%, not dead",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "import": "./dist/el-animate.es.js",
+      "require": "./dist/el-animate.umd.js"
+    }
+  },
   "scripts": {
-    "eslint": "eslint .",
-    "eslint:fix": "eslint . --fix",
-    "prettier": "prettier . --check",
-    "prettier:fix": "prettier . --write"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nikita Putilin",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.17.0",
