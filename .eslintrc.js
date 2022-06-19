@@ -10,6 +10,7 @@ module.exports = {
   },
   rules: {
     'no-underscore-dangle': 0,
+    'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': [2, { devDependencies: true }],
   },
   root: true,
