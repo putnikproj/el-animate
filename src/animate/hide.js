@@ -10,7 +10,7 @@ export default function hide(elem, options = {}) {
   const settings = mergeObjects(defaults, options);
 
   // Checks if we can play animation
-  if (elem.ELAnimate_shouldElementWait) {
+  if (elem.getAttribute('data-el-animate-should-wait') === 'true') {
     return;
   }
   if (isHidden(elem, settings) || isHiding(elem, settings) || has(elem, settings.enterFromClass)) {

@@ -38,14 +38,26 @@ export default function show(elem, options = {}) {
 
   // 1st frame
   settings.beforeEnterCallback(elem);
+
+  // It is necessary for correct enter-from animation
+  let shouldAddEnterActive = true;
+  if (!has(elem, settings.hiddenClass)) {
+    add(elem, settings.enterActiveClass);
+    shouldAddEnterActive = false;
+  }
+
   remove(elem, settings.leaveActiveClass);
   remove(elem, settings.leaveToClass);
   remove(elem, settings.hiddenClass);
   add(elem, settings.enterFromClass);
-  add(elem, settings.enterActiveClass);
 
   // 2nd frame
   nextFrame(() => {
+    // It is necessary for correct enter-from animation
+    if (shouldAddEnterActive) {
+      add(elem, settings.enterActiveClass);
+    }
+
     remove(elem, settings.enterFromClass);
     add(elem, settings.enterToClass);
 
