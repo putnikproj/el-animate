@@ -28,10 +28,8 @@
   "author": "Nikita Putilin",
   "license": "ISC",
   "lint-staged": {
-    "**/*.{js,ts}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "*.{js,ts}": "eslint",
+    "*": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
     "eslint": "^8.17.0",
