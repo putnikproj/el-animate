@@ -9,7 +9,7 @@ export default defineConfig({
     outDir: '../dist',
     emptyOutDir: true,
     lib: {
-      entry: resolve(__dirname, 'src/el-animate.js'),
+      entry: resolve(__dirname, 'src/index.js'),
       formats: ['cjs', 'es', 'iife', 'umd'],
       name: LIB_NAME,
     },
