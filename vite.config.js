@@ -8,6 +8,7 @@ export default defineConfig({
   build: {
     outDir: '../dist',
     emptyOutDir: true,
+    sourcemap: true,
     lib: {
       entry: resolve(__dirname, 'src/index.js'),
       formats: ['cjs', 'es', 'iife', 'umd'],

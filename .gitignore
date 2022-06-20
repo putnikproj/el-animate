@@ -11,6 +11,10 @@ coverage/
 # production
 dist/
 
+# cache
+.eslintcache
+*.tsbuildinfo
+
 # misc
 Thumbs.db
 .DS_Store
