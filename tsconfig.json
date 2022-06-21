@@ -2,7 +2,6 @@
   "compilerOptions": {
     /* Language and Environment */
     "target": "ES2015",
-    "incremental": true,
 
     /* Modules */
     "module": "commonjs",
