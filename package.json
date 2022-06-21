@@ -21,7 +21,7 @@
     "build": "vite build && tsc --emitDeclarationOnly",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "type-check": "tsc --noEmit --incremental",
+    "type-check": "tsc --noEmit",
     "format": "prettier . --write",
     "prepare": "husky install"
   },
@@ -30,7 +30,7 @@
   "license": "ISC",
   "lint-staged": {
     "*.{js,ts}": "eslint --cache",
-    "*.ts": "tsc --noEmit --incremental",
+    "*.ts": "tsc --noEmit",
     "*": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
