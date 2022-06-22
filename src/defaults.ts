@@ -1,3 +1,5 @@
+import { AllSettings } from './types';
+
 // Auto-prefixing
 /*
 const Defaults = {
@@ -20,7 +22,7 @@ const Defaults = {
 };
 */
 
-export default {
+const defaults: AllSettings = {
   shownClass: 'shown',
   hiddenClass: 'hidden',
   enterFromClass: 'enter-from',
@@ -32,8 +34,10 @@ export default {
   animationType: 'transition', // 'transition' | 'animation'
   multiClicksHandling: 'block', //! 'block' | 'from-start' | 'from-current' (recommended when .enter-to and .leave-from not in use)
   blockRestart: true, //! IN PROGRESS
-  beforeEnterCallback: () => {},
-  afterEnterCallback: () => {},
-  beforeLeaveCallback: () => {},
-  afterLeaveCallback: () => {},
+  beforeEnterCallback: () => undefined,
+  afterEnterCallback: () => undefined,
+  beforeLeaveCallback: () => undefined,
+  afterLeaveCallback: () => undefined,
 };
+
+export default defaults;

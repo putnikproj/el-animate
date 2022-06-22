@@ -8,9 +8,9 @@ export const State = {
   leaveFrom: 'leave-from',
   leaveActive: 'leave-active',
   leaveTo: 'leave-to',
-};
+} as const;
 
 export const Event = {
   ANIMATIONEND: 'animationend',
   TRANSITIONEND: 'transitionend',
-};
+} as const;

@@ -1,8 +1,9 @@
 import { has, add, remove } from './helpers/class-name';
 import { getEventName } from './helpers/utils';
+import { AllSettings } from './types';
 
 /** @returns should we remove eventListener or not */
-function animationEndHandler(elem, settings) {
+function animationEndHandler(elem: HTMLElement, settings: AllSettings) {
   // If handler triggered, but this is the 1st frame, do nothing and don't delete eventListener. Very rare case, but still
   if (has(elem, settings.enterFromClass) || has(elem, settings.leaveFromClass)) {
     return false;
@@ -27,7 +28,7 @@ function animationEndHandler(elem, settings) {
 }
 
 /** Similar to "once: true" option in addEventListener */
-export function addAnimationendEventListener(elem, settings) {
+export function addAnimationendEventListener(elem: HTMLElement, settings: AllSettings) {
   if (elem.getAttribute('data-el-animate-has-listener') === 'true') {
     return;
   }
@@ -35,17 +36,17 @@ export function addAnimationendEventListener(elem, settings) {
   const eventName = getEventName(settings.animationType);
 
   const handler = () => {
-    elem.setAttribute('data-el-animate-should-wait', true);
+    elem.setAttribute('data-el-animate-should-wait', 'true');
     const shouldRemoveEventListener = animationEndHandler(elem, settings);
 
     if (shouldRemoveEventListener) {
       elem.removeEventListener(eventName, handler);
-      elem.setAttribute('data-el-animate-has-listener', false);
+      elem.setAttribute('data-el-animate-has-listener', 'false');
     }
 
-    elem.setAttribute('data-el-animate-should-wait', false);
+    elem.setAttribute('data-el-animate-should-wait', 'false');
   };
 
-  elem.setAttribute('data-el-animate-has-listener', true);
+  elem.setAttribute('data-el-animate-has-listener', 'true');
   elem.addEventListener(eventName, handler);
 }

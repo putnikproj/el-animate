@@ -1,3 +1,10 @@
+const jsRules = {
+  'no-underscore-dangle': 0,
+  'import/prefer-default-export': 0,
+  'import/no-extraneous-dependencies': [2, { devDependencies: true }],
+  'import/extensions': ['error', 'ignorePackages', { js: 'never', ts: 'never' }],
+};
+
 module.exports = {
   root: true,
   env: {
@@ -9,12 +16,7 @@ module.exports = {
     sourceType: 'module',
   },
   extends: ['airbnb-base', 'prettier'],
-  rules: {
-    'no-underscore-dangle': 0,
-    'import/prefer-default-export': 0,
-    'import/no-extraneous-dependencies': [2, { devDependencies: true }],
-    'import/extensions': ['error', 'ignorePackages', { js: 'never', ts: 'never' }],
-  },
+  rules: jsRules,
   settings: {
     'import/resolver': {
       node: {
@@ -31,6 +33,7 @@ module.exports = {
       },
       plugins: ['@typescript-eslint'],
       extends: ['airbnb-base', 'airbnb-typescript/base', 'prettier'],
+      rules: { ...jsRules },
     },
   ],
 };

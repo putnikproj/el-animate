@@ -1,27 +1,24 @@
+import { AllSettings, UserSettings } from 'src/types';
 import { Event } from './enum';
 import { remove, add } from './class-name';
 
 import defaults from '../defaults';
 
 /** Fully render frame at first and then run callback */
-export function nextFrame(callback) {
+export function nextFrame(callback: () => void) {
   window.requestAnimationFrame(() => {
     window.requestAnimationFrame(callback);
   });
 }
 
-export function mergeObjects(first, second) {
-  if (typeof second !== 'object') {
-    return first;
-  }
-
+export function mergeSettings(userSettings: UserSettings): AllSettings {
   return {
-    ...first,
-    ...second,
+    ...defaults,
+    ...userSettings,
   };
 }
 
-export function getEventName(animationType) {
+export function getEventName(animationType: AllSettings['animationType']) {
   if (animationType === 'animation') {
     return Event.ANIMATIONEND;
   }
@@ -34,12 +31,15 @@ export function getEventName(animationType) {
 }
 
 /**
- * Method, if you want to set initial element state (shown or hidden) from js, but **you can do this from html**
- * @param {Node} elem
- * @param {'shown' | 'hidden'} state
+ * If you need so, you can set initial element state (shown or hidden).
+ * **Recommended to do this from html**
  */
-export function setInitialState(elem, state, options = {}) {
-  const settings = mergeObjects(defaults, options);
+export function setInitialState(
+  elem: HTMLElement,
+  state: 'shown' | 'hidden',
+  options: UserSettings = {},
+) {
+  const settings = mergeSettings(options);
 
   if (state === 'hidden') {
     remove(elem, settings.shownClass);

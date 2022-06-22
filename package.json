@@ -30,7 +30,7 @@
   "license": "ISC",
   "lint-staged": {
     "*.{js,ts}": "eslint --cache",
-    "*.ts": "tsc --noEmit",
+    "*.ts": "bash -c tsc --noEmit",
     "*": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
