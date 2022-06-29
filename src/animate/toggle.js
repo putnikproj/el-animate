@@ -1,11 +1,9 @@
 import { isShown, isHidden, isHiding, isShowing } from '../helpers/state';
-import { mergeObjects } from '../helpers/utils';
-
-import defaults from '../defaults';
+import { mergeSettings } from '../helpers/utils';
 
 /** Animated showing/hiding for node element depended on shown/hidden state */
 export default function toggle(elem, options = {}) {
-  const settings = mergeObjects(defaults, options);
+  const settings = mergeSettings(options);
 
   if (isHidden(elem, settings) || isHiding(elem, settings)) {
     this.show(elem, settings);

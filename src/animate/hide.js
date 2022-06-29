@@ -1,19 +1,22 @@
-import { has, add, remove } from '../helpers/class-name';
+import cl from '../helpers/class-list';
 import { isShown, isHidden, isHiding, isShowing } from '../helpers/state';
-import { mergeObjects, nextFrame } from '../helpers/utils';
+import { mergeSettings, nextFrame } from '../helpers/utils';
 
 import { addAnimationendEventListener } from '../event-listener';
-import defaults from '../defaults';
 
 /** Animated hiding for node element */
 export default function hide(elem, options = {}) {
-  const settings = mergeObjects(defaults, options);
+  const settings = mergeSettings(options);
 
   // Checks if we can play animation
   if (elem.getAttribute('data-el-animate-should-wait') === 'true') {
     return;
   }
-  if (isHidden(elem, settings) || isHiding(elem, settings) || has(elem, settings.enterFromClass)) {
+  if (
+    isHidden(elem, settings) ||
+    isHiding(elem, settings) ||
+    cl.has(elem, settings.enterFromClass)
+  ) {
     return;
   }
   switch (settings.multiClicksHandling) {
@@ -39,27 +42,27 @@ export default function hide(elem, options = {}) {
   // 1st frame
   settings.beforeLeaveCallback(elem);
 
-  // It is necessary for correct leave-from animation
-  let shouldAddLeaveActive = true;
-  if (!has(elem, settings.shownClass)) {
-    add(elem, settings.leaveActiveClass);
-    shouldAddLeaveActive = false;
+  // It is necessary for correct leave-from animation and multiclicks handling
+
+  const shouldAddLeaveActive = !cl.has(elem, settings.shownClass);
+  if (shouldAddLeaveActive) {
+    cl.add(elem, settings.leaveActiveClass);
   }
 
-  remove(elem, settings.enterActiveClass);
-  remove(elem, settings.enterToClass);
-  remove(elem, settings.shownClass);
-  add(elem, settings.leaveFromClass);
+  cl.remove(elem, settings.enterActiveClass);
+  cl.remove(elem, settings.enterToClass);
+  cl.remove(elem, settings.shownClass);
+  cl.add(elem, settings.leaveFromClass);
 
   // 2nd frame
   nextFrame(() => {
-    // It is necessary for correct leave-from animation
-    if (shouldAddLeaveActive) {
-      add(elem, settings.leaveActiveClass);
+    // It is necessary for correct leave-from animation and multiclicks handling
+    if (!cl.has(elem, settings.leaveActiveClass)) {
+      cl.add(elem, settings.leaveActiveClass);
     }
 
-    remove(elem, settings.leaveFromClass);
-    add(elem, settings.leaveToClass);
+    cl.remove(elem, settings.leaveFromClass);
+    cl.add(elem, settings.leaveToClass);
 
     addAnimationendEventListener(elem, settings);
 

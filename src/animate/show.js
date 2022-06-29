@@ -1,19 +1,22 @@
-import { has, add, remove } from '../helpers/class-name';
+import cl from '../helpers/class-list';
 import { isShown, isHidden, isHiding, isShowing } from '../helpers/state';
-import { mergeObjects, nextFrame } from '../helpers/utils';
+import { mergeSettings, nextFrame } from '../helpers/utils';
 
 import { addAnimationendEventListener } from '../event-listener';
-import defaults from '../defaults';
 
 /** Animated showing for node element */
 export default function show(elem, options = {}) {
-  const settings = mergeObjects(defaults, options);
+  const settings = mergeSettings(options);
 
   // Checks if we can play animation
   if (elem.getAttribute('data-el-animate-should-wait') === 'true') {
     return;
   }
-  if (isShown(elem, settings) || isShowing(elem, settings) || has(elem, settings.leaveFromClass)) {
+  if (
+    isShown(elem, settings) ||
+    isShowing(elem, settings) ||
+    cl.has(elem, settings.leaveFromClass)
+  ) {
     return;
   }
   switch (settings.multiClicksHandling) {
@@ -41,25 +44,25 @@ export default function show(elem, options = {}) {
 
   // It is necessary for correct enter-from animation
   let shouldAddEnterActive = true;
-  if (!has(elem, settings.hiddenClass)) {
-    add(elem, settings.enterActiveClass);
+  if (!cl.has(elem, settings.hiddenClass)) {
+    cl.add(elem, settings.enterActiveClass);
     shouldAddEnterActive = false;
   }
 
-  remove(elem, settings.leaveActiveClass);
-  remove(elem, settings.leaveToClass);
-  remove(elem, settings.hiddenClass);
-  add(elem, settings.enterFromClass);
+  cl.remove(elem, settings.leaveActiveClass);
+  cl.remove(elem, settings.leaveToClass);
+  cl.remove(elem, settings.hiddenClass);
+  cl.add(elem, settings.enterFromClass);
 
   // 2nd frame
   nextFrame(() => {
     // It is necessary for correct enter-from animation
     if (shouldAddEnterActive) {
-      add(elem, settings.enterActiveClass);
+      cl.add(elem, settings.enterActiveClass);
     }
 
-    remove(elem, settings.enterFromClass);
-    add(elem, settings.enterToClass);
+    cl.remove(elem, settings.enterFromClass);
+    cl.add(elem, settings.enterToClass);
 
     addAnimationendEventListener(elem, settings);
 

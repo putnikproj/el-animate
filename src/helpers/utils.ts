@@ -1,8 +1,8 @@
 import { AllSettings, UserSettings } from 'src/types';
-import { Event } from './enum';
-import { remove, add } from './class-name';
+import { AnimationEndEvent, AnimationType } from './enum';
+import cl from './class-list';
 
-import defaults from '../defaults';
+import defaults from '../config';
 
 /** Fully render frame at first and then run callback */
 export function nextFrame(callback: () => void) {
@@ -19,12 +19,12 @@ export function mergeSettings(userSettings: UserSettings): AllSettings {
 }
 
 export function getEventName(animationType: AllSettings['animationType']) {
-  if (animationType === 'animation') {
-    return Event.ANIMATIONEND;
+  if (animationType === AnimationType.ANIMATION) {
+    return AnimationEndEvent.ANIMATION;
   }
 
-  if (animationType === 'transition') {
-    return Event.TRANSITIONEND;
+  if (animationType === AnimationType.TRANSITION) {
+    return AnimationEndEvent.TRANSITION;
   }
 
   throw new Error('Incorrect animationType setting');
@@ -42,14 +42,14 @@ export function setInitialState(
   const settings = mergeSettings(options);
 
   if (state === 'hidden') {
-    remove(elem, settings.shownClass);
-    add(elem, settings.hiddenClass);
+    cl.remove(elem, settings.shownClass);
+    cl.add(elem, settings.hiddenClass);
     return;
   }
 
   if (state === 'shown') {
-    remove(elem, settings.hiddenClass);
-    add(elem, settings.shownClass);
+    cl.remove(elem, settings.hiddenClass);
+    cl.add(elem, settings.shownClass);
     return;
   }
 

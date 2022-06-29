@@ -1,4 +1,5 @@
-import { AllSettings } from './types';
+import { AnimationType } from './helpers/enum';
+import { AllSettings, AnimateSettings } from './types';
 
 // Auto-prefixing
 /*
@@ -41,3 +42,22 @@ const defaults: AllSettings = {
 };
 
 export default defaults;
+
+export const getAnimateConfig = (options: Partial<AnimateSettings>): AnimateSettings => {
+  const curPrefix = options.classNames?.prefix || 'el-animate';
+
+  return {
+    classNames: {
+      prefix: curPrefix,
+      initial: options.classNames?.initial || `${curPrefix}-initial`,
+      from: options.classNames?.from || `${curPrefix}-from`,
+      active: options.classNames?.active || `${curPrefix}-active`,
+      to: options.classNames?.to || `${curPrefix}-to`,
+      final: options.classNames?.final || `${curPrefix}-final`,
+    },
+    animation: {
+      type: options.animation?.type || AnimationType.TRANSITION,
+      name: options.animation?.name,
+    },
+  };
+};

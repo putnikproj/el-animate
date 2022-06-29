@@ -1,33 +1,32 @@
-import { has, add, remove } from './helpers/class-name';
+import cl from './helpers/class-list';
+import { AnimationEndEvent, AnimationType } from './helpers/enum';
 import { getEventName } from './helpers/utils';
-import { AllSettings } from './types';
+import { AllSettings, AnimateSettings } from './types';
 
 /** @returns should we remove eventListener or not */
 function animationEndHandler(elem: HTMLElement, settings: AllSettings) {
   // If handler triggered, but this is the 1st frame, do nothing and don't delete eventListener. Very rare case, but still
-  if (has(elem, settings.enterFromClass) || has(elem, settings.leaveFromClass)) {
+  if (cl.has(elem, settings.enterFromClass) || cl.has(elem, settings.leaveFromClass)) {
     return false;
   }
 
-  if (has(elem, settings.enterActiveClass)) {
-    remove(elem, settings.enterActiveClass);
-    remove(elem, settings.enterToClass);
-    add(elem, settings.shownClass);
+  if (cl.has(elem, settings.enterActiveClass)) {
+    cl.remove(elem, settings.enterActiveClass);
+    cl.remove(elem, settings.enterToClass);
+    cl.add(elem, settings.shownClass);
     settings.afterEnterCallback(elem);
-    return true;
   }
 
-  if (has(elem, settings.leaveActiveClass)) {
-    remove(elem, settings.leaveActiveClass);
-    remove(elem, settings.leaveToClass);
-    add(elem, settings.hiddenClass);
+  if (cl.has(elem, settings.leaveActiveClass)) {
+    cl.remove(elem, settings.leaveActiveClass);
+    cl.remove(elem, settings.leaveToClass);
+    cl.add(elem, settings.hiddenClass);
     settings.afterLeaveCallback(elem);
   }
 
   return true;
 }
 
-/** Similar to "once: true" option in addEventListener */
 export function addAnimationendEventListener(elem: HTMLElement, settings: AllSettings) {
   if (elem.getAttribute('data-el-animate-has-listener') === 'true') {
     return;
@@ -49,4 +48,31 @@ export function addAnimationendEventListener(elem: HTMLElement, settings: AllSet
 
   elem.setAttribute('data-el-animate-has-listener', 'true');
   elem.addEventListener(eventName, handler);
+}
+
+export function createAnimationEndHandler(
+  elem: HTMLElement,
+  settings: AnimateSettings,
+  cb: () => void,
+) {
+  if (settings.animation.type === AnimationType.TRANSITION) {
+    const handler = () => {
+      cb();
+      elem.removeEventListener(AnimationEndEvent.TRANSITION, handler);
+    };
+
+    elem.addEventListener(AnimationEndEvent.TRANSITION, handler);
+  }
+  if (settings.animation.type === AnimationType.ANIMATION) {
+    const handler = (evt: AnimationEvent) => {
+      if (evt.animationName !== settings.animation.name) {
+        return;
+      }
+
+      cb();
+      elem.removeEventListener(AnimationEndEvent.ANIMATION, handler);
+    };
+
+    elem.addEventListener(AnimationEndEvent.ANIMATION, handler);
+  }
 }

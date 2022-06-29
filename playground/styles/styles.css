@@ -71,6 +71,23 @@
   transition: transform 1s ease-in-out;
 }
 
+/* Animate block */
+
+.animate-block {
+  display: inline-block;
+  padding: 30px;
+  margin-top: 20px;
+  background-color: chocolate;
+}
+
+.animate-block.animation-to {
+  transform: translateX(100px);
+}
+
+.animate-block.animation-active {
+  transition: transform 1s ease;
+}
+
 /* Button */
 
 button {
