@@ -4,18 +4,17 @@ import cl from '../helpers/class-list';
 import { nextFrame } from '../helpers/utils';
 
 import { createAnimationEndHandler } from '../event-listener';
-
-function isAnimating(elem: HTMLElement) {
-  return elem.dataset.elAnimateIsAnimating === 'true';
-}
+import { getAnimationStatus, setAnimationStatus } from '../helpers/state';
+import { AnimationStatus } from '../helpers/enum';
 
 function canPlayAnimation(elem: HTMLElement) {
-  return !isAnimating(elem);
+  return getAnimationStatus(elem) !== AnimationStatus.ANIMATING;
 }
 
 function setAnimationFromValues(elem: HTMLElement, settings: AnimateSettings) {
   cl.remove(elem, settings.classNames.initial);
   cl.add(elem, settings.classNames.from);
+  setAnimationStatus(elem, AnimationStatus.INITIAL);
 }
 
 function setAnimationEndValues(elem: HTMLElement, settings: AnimateSettings) {
@@ -26,8 +25,7 @@ function setAnimationEndValues(elem: HTMLElement, settings: AnimateSettings) {
 
 function setAnimationActiveValues(elem: HTMLElement, settings: AnimateSettings) {
   cl.remove(elem, settings.classNames.from);
-  cl.add(elem, settings.classNames.active);
-  cl.add(elem, settings.classNames.to);
+  cl.add(elem, settings.classNames.active, settings.classNames.to);
 }
 
 export default function animate(elem: HTMLElement, options: Partial<AnimateSettings> = {}) {
@@ -39,7 +37,8 @@ export default function animate(elem: HTMLElement, options: Partial<AnimateSetti
 
   setAnimationFromValues(elem, settings);
   nextFrame(() => setAnimationActiveValues(elem, settings));
-  nextFrame(() =>
-    createAnimationEndHandler(elem, settings, () => setAnimationEndValues(elem, settings)),
-  );
+  nextFrame(() => {
+    createAnimationEndHandler(elem, settings, () => setAnimationEndValues(elem, settings));
+    setAnimationStatus(elem, AnimationStatus.ANIMATING);
+  });
 }

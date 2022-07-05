@@ -1,5 +1,6 @@
 import cl from './helpers/class-list';
-import { AnimationEndEvent, AnimationType } from './helpers/enum';
+import { AnimationEndEvent, AnimationStatus, AnimationType } from './helpers/enum';
+import { clearAnimationStatus, getAnimationStatus } from './helpers/state';
 import { getEventName } from './helpers/utils';
 import { AllSettings, AnimateSettings } from './types';
 
@@ -55,10 +56,15 @@ export function createAnimationEndHandler(
   settings: AnimateSettings,
   cb: () => void,
 ) {
+  if (getAnimationStatus(elem) === AnimationStatus.ANIMATING) {
+    return;
+  }
+
   if (settings.animation.type === AnimationType.TRANSITION) {
     const handler = () => {
       cb();
       elem.removeEventListener(AnimationEndEvent.TRANSITION, handler);
+      clearAnimationStatus(elem);
     };
 
     elem.addEventListener(AnimationEndEvent.TRANSITION, handler);
@@ -71,6 +77,7 @@ export function createAnimationEndHandler(
 
       cb();
       elem.removeEventListener(AnimationEndEvent.ANIMATION, handler);
+      clearAnimationStatus(elem);
     };
 
     elem.addEventListener(AnimationEndEvent.ANIMATION, handler);

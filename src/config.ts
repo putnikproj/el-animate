@@ -45,7 +45,6 @@ export default defaults;
 
 export const getAnimateConfig = (options: Partial<AnimateSettings>): AnimateSettings => {
   const curPrefix = options.classNames?.prefix || 'el-animate';
-
   return {
     classNames: {
       prefix: curPrefix,
@@ -53,7 +52,7 @@ export const getAnimateConfig = (options: Partial<AnimateSettings>): AnimateSett
       from: options.classNames?.from || `${curPrefix}-from`,
       active: options.classNames?.active || `${curPrefix}-active`,
       to: options.classNames?.to || `${curPrefix}-to`,
-      final: options.classNames?.final || `${curPrefix}-final`,
+      final: options.classNames?.final || '',
     },
     animation: {
       type: options.animation?.type || AnimationType.TRANSITION,

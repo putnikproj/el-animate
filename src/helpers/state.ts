@@ -25,5 +25,9 @@ export function setAnimationStatus(elem: HTMLElement, status: AnimationStatus) {
 }
 
 export function getAnimationStatus(elem: HTMLElement) {
-  elem.getAttribute(ANIMATION_STATUS_ATTRIBUTE);
+  return elem.getAttribute(ANIMATION_STATUS_ATTRIBUTE);
+}
+
+export function clearAnimationStatus(elem: HTMLElement) {
+  elem.removeAttribute(ANIMATION_STATUS_ATTRIBUTE);
 }
