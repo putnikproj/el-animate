@@ -1,7 +1,7 @@
 import show from './animate/show';
 import hide from './animate/hide';
 import toggle from './animate/toggle';
-import animate from './animate/animate';
+import animate from './animate/core';
 
 import { setInitialState } from './helpers/utils';
 

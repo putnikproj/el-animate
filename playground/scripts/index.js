@@ -95,7 +95,8 @@ removeButton.addEventListener('click', removeButtonClickHandler);
 animateTarget.addEventListener('click', () => {
   ELAnimate.animate(animateTarget, {
     classNames: {
-      prefix: 'animation',
+      to: 'animation-to',
+      active: 'animation-active',
     },
   });
 });

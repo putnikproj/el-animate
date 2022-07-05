@@ -1,8 +1,8 @@
 import cl from './helpers/class-list';
-import { AnimationEndEvent, AnimationStatus, AnimationType } from './helpers/enum';
-import { clearAnimationStatus, getAnimationStatus } from './helpers/state';
+import { AnimationStatus, AnimationType } from './helpers/enum';
+import { getAnimationStatus } from './helpers/state';
 import { getEventName } from './helpers/utils';
-import { AllSettings, AnimateSettings } from './types';
+import { AllSettings } from './types';
 
 /** @returns should we remove eventListener or not */
 function animationEndHandler(elem: HTMLElement, settings: AllSettings) {
@@ -53,33 +53,19 @@ export function addAnimationendEventListener(elem: HTMLElement, settings: AllSet
 
 export function createAnimationEndHandler(
   elem: HTMLElement,
-  settings: AnimateSettings,
+  animationType: AnimationType,
   cb: () => void,
 ) {
   if (getAnimationStatus(elem) === AnimationStatus.ANIMATING) {
     return;
   }
 
-  if (settings.animation.type === AnimationType.TRANSITION) {
-    const handler = () => {
-      cb();
-      elem.removeEventListener(AnimationEndEvent.TRANSITION, handler);
-      clearAnimationStatus(elem);
-    };
+  const eventName = getEventName(animationType);
 
-    elem.addEventListener(AnimationEndEvent.TRANSITION, handler);
-  }
-  if (settings.animation.type === AnimationType.ANIMATION) {
-    const handler = (evt: AnimationEvent) => {
-      if (evt.animationName !== settings.animation.name) {
-        return;
-      }
+  const handler = () => {
+    cb();
+    elem.removeEventListener(eventName, handler);
+  };
 
-      cb();
-      elem.removeEventListener(AnimationEndEvent.ANIMATION, handler);
-      clearAnimationStatus(elem);
-    };
-
-    elem.addEventListener(AnimationEndEvent.ANIMATION, handler);
-  }
+  elem.addEventListener(eventName, handler);
 }

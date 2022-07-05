@@ -9,6 +9,6 @@ export enum AnimationEndEvent {
 }
 
 export enum AnimationStatus {
-  INITIAL = 'initial',
+  START = 'start',
   ANIMATING = 'animating',
 }

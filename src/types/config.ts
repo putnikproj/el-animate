@@ -25,17 +25,8 @@ export type AllSettings = {
 export type UserSettings = Partial<AllSettings>;
 
 // New animate function, work in progress
-export type AnimateSettings = {
+export type CoreSettings = {
   classNames: {
-    /**
-     * All classnames except `final` will be generated automaticaly with this prefix.
-     * You can rewrite any classname by passing it as options
-     * @default 'el-animate'
-     * @example
-     * prefix: 'animation'
-     * initial: 'animation-initial'
-     */
-    prefix: string;
     /**
      * ClassName which element contains before animation starts and should be deleted when animation starts
      * @default ''
@@ -43,14 +34,17 @@ export type AnimateSettings = {
     initial: string;
     /**
      * ClassName which element contains right after animation starts and will be deleted the next frame
+     * @default ''
      */
     from: string;
     /**
      * ClassName which element contains during the whole animation
+     * @default ''
      */
     active: string;
     /**
      * ClassName which element will contain right after 'from' className
+     * @default 'el-animate-to'
      */
     to: string;
     /**
@@ -71,6 +65,6 @@ export type AnimateSettings = {
     /**
      * See `animationType` annotation
      */
-    name?: string;
+    // name?: string;
   };
 };
