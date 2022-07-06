@@ -1,6 +1,3 @@
-import show from './animate/show';
-import hide from './animate/hide';
-import toggle from './animate/toggle';
 import animate from './animate/core';
 
 import { setInitialState } from './helpers/utils';
@@ -18,4 +15,4 @@ import { setInitialState } from './helpers/utils';
  * .hidden
  */
 
-export { show, hide, toggle, animate, setInitialState };
+export { animate, setInitialState };
