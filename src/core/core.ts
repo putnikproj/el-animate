@@ -1,13 +1,10 @@
 import { CoreSettings } from '../types';
-import { getCoreConfig } from '../config';
 import { nextFrame } from '../helpers/utils';
 
 import createAnimationEndHandler from '../event-listener';
 import { setFinalState, setFromState, setToState } from './state';
 
-export default function animate(elem: HTMLElement, options: Partial<CoreSettings> = {}) {
-  const settings = getCoreConfig(options);
-
+export default function createAnimation(elem: HTMLElement, settings: CoreSettings) {
   setFromState(elem, settings.classNames);
 
   createAnimationEndHandler(elem, settings.animation.type, () => {
