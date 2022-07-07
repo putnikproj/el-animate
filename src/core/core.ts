@@ -1,13 +1,13 @@
 import { CoreConfig } from '../configs/core-config';
 import { nextFrame } from '../utils';
 
-import createAnimationEndHandler from '../event-listener';
+import createAnimationEndHandler from './animation-end-handler';
 import { setFinalState, setFromState, setToState } from './state';
 
 export default function createAnimation(elem: HTMLElement, settings: CoreConfig) {
   setFromState(elem, settings.classNames);
 
-  createAnimationEndHandler(elem, settings.animation.type, () => {
+  createAnimationEndHandler(elem, settings.animation, () => {
     setFinalState(elem, settings.classNames);
   });
 

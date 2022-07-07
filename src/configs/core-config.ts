@@ -1,4 +1,4 @@
-import { AnimationType } from '../enum';
+import { AnimationType, AnimationTypeUnion } from '../enum';
 
 export type CoreConfig = {
   classNames: {
@@ -14,19 +14,20 @@ export type CoreConfig = {
      */
     from: string;
     /**
-     * ClassName which element contains during the whole animation
+     * ClassName which element contains during the whole animation.
+     * Usually there you write `animation` or `transition` css properties.
+     * (on: 1st or 2nd frame, off: last frame)
      * @default ''
      */
     active: string;
     /**
-     * ClassName which element will contain right after 'from' className
-     * (on: 1st or 2nd frame, off: last frame)
-     * @default 'el-animate-to'
+     * Final animation point
+     * (on: 2nd frame, off: last frame)
+     * @default ''
      */
     to: string;
     /**
      * ClassName which element contains after animation ends
-     * (on: 2nd frame, off: last frame)
      * @default ''
      */
     final: string;
@@ -35,15 +36,16 @@ export type CoreConfig = {
     /**
      * When you add animations with css, you can do this either with `transition` or with `animation` property
      * You should choose one of this for correct animation end detecting.
-     * *NOTE:* if you have several animation, you can additionally set `animation.name` field in config
-     * Then el-animate can properly detect animation end with this animation name.
+     * *If you have problems with detecting animation end, see `animation.end`*
      * @default 'transition'
      */
-    type: AnimationType;
+    type: AnimationTypeUnion;
     /**
-     * See `animationType` annotation
+     * if you have several animation, you can additionally set `animation.name` field in config
+     * Then el-animate can properly detect animation end with this animation name.
+     * You should type the same string as in @keyframes
      */
-    // name?: string;
+    name: string | undefined;
   };
 };
 
@@ -53,12 +55,12 @@ export function getCoreConfig(options: Partial<CoreConfig>): CoreConfig {
       initial: options.classNames?.initial || '',
       from: options.classNames?.from || '',
       active: options.classNames?.active || '',
-      to: options.classNames?.to || `el-animate-to`,
+      to: options.classNames?.to || '',
       final: options.classNames?.final || '',
     },
     animation: {
       type: options.animation?.type || AnimationType.TRANSITION,
-      // name: options.animation?.name,
+      name: options.animation?.name,
     },
   };
 }

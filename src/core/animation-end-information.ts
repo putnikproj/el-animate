@@ -1,11 +1,11 @@
 const ANIMATION_END_HANDLER_PROPERTY = 'elAnimateAnimationEndHandler';
-const ANIMATION_END_PROPERTY_SETTINGS = {
+const ANIMATION_END_PROPERTY_SETTINGS: PropertyDescriptor = {
   configurable: true,
   enumerable: true,
   writable: true,
 };
 
-export type AnimationEndHandler = () => void;
+type AnimationEndHandler = (evt: AnimationEvent | TransitionEvent) => void;
 
 export enum AnimationEndEvent {
   TRANSITION = 'transitionend',
