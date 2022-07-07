@@ -1,9 +1,8 @@
-import cl from '../helpers/class-list';
-import { CoreSettings } from '../types';
-import { clearAnimationStatus, setAnimationStatus } from '../helpers/state';
-import { AnimationStatus } from '../helpers/enum';
+import cl from '../class-list';
+import { CoreConfig } from '../configs/core-config';
+import { clearAnimationStatus, setAnimationStatus, AnimationStatus } from './animation-status';
 
-export function setFromState(elem: HTMLElement, classNames: CoreSettings['classNames']) {
+export function setFromState(elem: HTMLElement, classNames: CoreConfig['classNames']) {
   const { initial, from, active, to, final } = classNames;
 
   cl.remove(elem, initial, active, to, final);
@@ -12,7 +11,7 @@ export function setFromState(elem: HTMLElement, classNames: CoreSettings['classN
   setAnimationStatus(elem, AnimationStatus.START);
 }
 
-export function setToState(elem: HTMLElement, classNames: CoreSettings['classNames']) {
+export function setToState(elem: HTMLElement, classNames: CoreConfig['classNames']) {
   const { initial, from, active, to, final } = classNames;
 
   cl.remove(elem, initial, from, final);
@@ -21,7 +20,7 @@ export function setToState(elem: HTMLElement, classNames: CoreSettings['classNam
   setAnimationStatus(elem, AnimationStatus.ANIMATING);
 }
 
-export function setFinalState(elem: HTMLElement, classNames: CoreSettings['classNames']) {
+export function setFinalState(elem: HTMLElement, classNames: CoreConfig['classNames']) {
   const { initial, from, active, to, final } = classNames;
 
   cl.remove(elem, initial, from, active, to);

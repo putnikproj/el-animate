@@ -1,31 +1,6 @@
-import { AnimationType } from 'src/helpers/enum';
+import { AnimationType } from '../enum';
 
-export type AllSettings = {
-  // End states
-  shownClass: string;
-  hiddenClass: string;
-  // Enter animation states
-  enterFromClass: string;
-  enterActiveClass: string;
-  enterToClass: string;
-  // Leave animation states
-  leaveFromClass: string;
-  leaveActiveClass: string;
-  leaveToClass: string;
-
-  animationType: 'transition' | 'animation';
-  multiClicksHandling: 'block' | 'from-start' | 'from-current';
-  blockRestart: boolean; //! IN PROGRESS
-  beforeEnterCallback: (elem: HTMLElement) => void;
-  afterEnterCallback: (elem: HTMLElement) => void;
-  beforeLeaveCallback: (elem: HTMLElement) => void;
-  afterLeaveCallback: (elem: HTMLElement) => void;
-};
-
-export type UserSettings = Partial<AllSettings>;
-
-// New animate function, work in progress
-export type CoreSettings = {
+export type CoreConfig = {
   classNames: {
     /**
      * ClassName which element contains before animation starts and should be deleted when animation starts
@@ -33,7 +8,8 @@ export type CoreSettings = {
      */
     initial: string;
     /**
-     * ClassName which element contains right after animation starts and will be deleted the next frame
+     * From wich point animation should be started
+     * (Adds: 1st frame, Removes: 2nd frame)
      * @default ''
      */
     from: string;
@@ -44,11 +20,13 @@ export type CoreSettings = {
     active: string;
     /**
      * ClassName which element will contain right after 'from' className
+     * (on: 1st or 2nd frame, off: last frame)
      * @default 'el-animate-to'
      */
     to: string;
     /**
      * ClassName which element contains after animation ends
+     * (on: 2nd frame, off: last frame)
      * @default ''
      */
     final: string;
@@ -68,3 +46,19 @@ export type CoreSettings = {
     // name?: string;
   };
 };
+
+export function getCoreConfig(options: Partial<CoreConfig>): CoreConfig {
+  return {
+    classNames: {
+      initial: options.classNames?.initial || '',
+      from: options.classNames?.from || '',
+      active: options.classNames?.active || '',
+      to: options.classNames?.to || `el-animate-to`,
+      final: options.classNames?.final || '',
+    },
+    animation: {
+      type: options.animation?.type || AnimationType.TRANSITION,
+      // name: options.animation?.name,
+    },
+  };
+}

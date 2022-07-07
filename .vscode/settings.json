@@ -1,4 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "files.autoSave": "off"
+  "files.autoSave": "off",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.importModuleSpecifier": "relative"
 }

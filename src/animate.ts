@@ -1,10 +1,9 @@
-import { getCoreConfig } from './config';
-import { CoreSettings } from './types';
+import { getCoreConfig, CoreConfig } from './configs/core-config';
 
 import createAnimation from './core/core';
 
-export default function animate(elem: HTMLElement, options: Partial<CoreSettings> = {}) {
-  const coreSettings = getCoreConfig(options);
+export default function animate(elem: HTMLElement, options: Partial<CoreConfig> = {}) {
+  const coreConfig = getCoreConfig(options);
 
-  createAnimation(elem, coreSettings);
+  createAnimation(elem, coreConfig);
 }

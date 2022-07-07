@@ -1,10 +1,10 @@
-import { CoreSettings } from '../types';
-import { nextFrame } from '../helpers/utils';
+import { CoreConfig } from '../configs/core-config';
+import { nextFrame } from '../utils';
 
 import createAnimationEndHandler from '../event-listener';
 import { setFinalState, setFromState, setToState } from './state';
 
-export default function createAnimation(elem: HTMLElement, settings: CoreSettings) {
+export default function createAnimation(elem: HTMLElement, settings: CoreConfig) {
   setFromState(elem, settings.classNames);
 
   createAnimationEndHandler(elem, settings.animation.type, () => {

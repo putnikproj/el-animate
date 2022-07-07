@@ -1,12 +1,24 @@
 import {
+  AnimationEndEvent,
   AnimationEndHandler,
   clearAnimationEndInformation,
   getAnimationEndInformation,
   setAnimationEndInformation,
-} from './helpers/animation-end';
-import { AnimationEndEvent, AnimationStatus, AnimationType } from './helpers/enum';
-import { getAnimationStatus } from './helpers/state';
-import { getEventName } from './helpers/utils';
+} from './core/animation-end-information';
+import { AnimationType } from './enum';
+import { getAnimationStatus, AnimationStatus } from './core/animation-status';
+
+function getEventName(animationType: AnimationType) {
+  if (animationType === AnimationType.ANIMATION) {
+    return AnimationEndEvent.ANIMATION;
+  }
+
+  if (animationType === AnimationType.TRANSITION) {
+    return AnimationEndEvent.TRANSITION;
+  }
+
+  throw new Error('Incorrect animationType setting');
+}
 
 function addAnimationEndEventListener(
   elem: HTMLElement,

@@ -1,5 +1,3 @@
-import { AnimationEndEvent } from './enum';
-
 const ANIMATION_END_HANDLER_PROPERTY = 'elAnimateAnimationEndHandler';
 const ANIMATION_END_PROPERTY_SETTINGS = {
   configurable: true,
@@ -8,6 +6,11 @@ const ANIMATION_END_PROPERTY_SETTINGS = {
 };
 
 export type AnimationEndHandler = () => void;
+
+export enum AnimationEndEvent {
+  TRANSITION = 'transitionend',
+  ANIMATION = 'animationend',
+}
 
 export function setAnimationEndInformation(
   elem: HTMLElement,
