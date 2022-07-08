@@ -5,7 +5,6 @@ import {
   setAnimationEndInformation,
 } from './animation-end-information';
 import { AnimationType, AnimationTypeUnion } from '../enum';
-import { getAnimationStatus, AnimationStatus } from './animation-status';
 import { CoreConfig } from '../configs/core-config';
 
 function getEventName(animationType: AnimationTypeUnion) {
@@ -67,10 +66,6 @@ export default function createAnimationEndHandler(
   animationSettings: CoreConfig['animation'],
   cb: () => void,
 ) {
-  if (getAnimationStatus(elem) === AnimationStatus.ANIMATING) {
-    return;
-  }
-
   removeAnimationEndEventListener(elem);
   addAnimationEndEventListener(elem, animationSettings, cb);
 }
