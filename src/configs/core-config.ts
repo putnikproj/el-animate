@@ -1,5 +1,7 @@
 import { AnimationType, AnimationTypeUnion } from '../enum';
 
+type CoreCallback = () => void;
+
 export type CoreConfig = {
   classNames: {
     /**
@@ -47,7 +49,27 @@ export type CoreConfig = {
      */
     name: string | undefined;
   };
+  callbacks: {
+    /**
+     * Called before animation start, element has `initial` classname
+     */
+    beforeStart: CoreCallback;
+    /**
+     * Called when animation initialized: element has `from` classname, animation end handling added
+     */
+    fromStateSet: CoreCallback;
+    /**
+     * Called when element has `to` classname
+     */
+    toStateSet: CoreCallback;
+    /**
+     * Called when animation ended, element has `final` classname
+     */
+    afterEnd: CoreCallback;
+  };
 };
+
+const defaultCallback: CoreCallback = () => undefined;
 
 export function getCoreConfig(options: Partial<CoreConfig>): CoreConfig {
   return {
@@ -61,6 +83,12 @@ export function getCoreConfig(options: Partial<CoreConfig>): CoreConfig {
     animation: {
       type: options.animation?.type || AnimationType.TRANSITION,
       name: options.animation?.name,
+    },
+    callbacks: {
+      beforeStart: options.callbacks?.beforeStart || defaultCallback,
+      fromStateSet: options.callbacks?.fromStateSet || defaultCallback,
+      toStateSet: options.callbacks?.toStateSet || defaultCallback,
+      afterEnd: options.callbacks?.afterEnd || defaultCallback,
     },
   };
 }
