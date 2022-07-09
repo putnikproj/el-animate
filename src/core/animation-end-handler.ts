@@ -4,7 +4,7 @@ import {
   getAnimationEndInformation,
   setAnimationEndInformation,
 } from './animation-end-information';
-import { AnimationType, AnimationTypeUnion } from '../enum';
+import { AnimationType, AnimationTypeUnion } from '../helpers/enum';
 import { CoreConfig } from '../configs/core-config';
 
 function getEventName(animationType: AnimationTypeUnion) {

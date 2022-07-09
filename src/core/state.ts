@@ -1,4 +1,4 @@
-import cl from '../class-list';
+import cl from '../helpers/class-list';
 import { CoreConfig } from '../configs/core-config';
 import { clearAnimationStatus, setAnimationStatus, AnimationStatus } from './animation-status';
 

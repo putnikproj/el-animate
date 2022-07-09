@@ -1,4 +1,4 @@
-import { EnumValues } from '../utils';
+import { EnumValues } from '../helpers/utils';
 
 const ANIMATION_STATUS_ATTRIBUTE = 'data-el-animate-status';
 

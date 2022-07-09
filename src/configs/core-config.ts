@@ -1,4 +1,4 @@
-import { AnimationType, AnimationTypeUnion } from '../enum';
+import { AnimationType, AnimationTypeUnion } from '../helpers/enum';
 
 type CoreCallback = () => void;
 

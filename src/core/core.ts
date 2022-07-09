@@ -1,5 +1,5 @@
 import { CoreConfig } from '../configs/core-config';
-import { nextFrame } from '../utils';
+import { nextFrame } from '../helpers/utils';
 
 import createAnimationEndHandler from './animation-end-handler';
 import { getAnimationStatus } from './animation-status';
