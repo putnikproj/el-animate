@@ -4,3 +4,5 @@ export function nextFrame(callback: () => void) {
     window.requestAnimationFrame(callback);
   });
 }
+
+export type EnumValues<T> = T[keyof T];

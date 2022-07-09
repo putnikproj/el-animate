@@ -99,6 +99,7 @@ animateTarget.addEventListener('click', () => {
       final: 'animation-to',
       active: 'animation-active',
     },
+    multiClicksHandling: 'replaceToState',
   });
 });
 

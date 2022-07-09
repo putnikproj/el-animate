@@ -23,7 +23,7 @@ export type CoreConfig = {
      */
     active: string;
     /**
-     * Final animation point
+     * Final animation point. Note: If you want the element to have `to` state after animation end, then set `final` classname the same as `to`
      * (on: 2nd frame, off: last frame)
      * @default ''
      */
@@ -67,6 +67,16 @@ export type CoreConfig = {
      */
     afterEnd: CoreCallback;
   };
+  /**
+   * You can set what should el-animate do, if new animate function called, but the element is currently animating
+   * - `block` means that we should abort new animation calls, while the element is animation
+   * - `restart` means that we should stop current animation and start the new one
+   * - `replaceToState` means that we only replace final points of animation
+   * (el-animate replaces `to` className and animation end handler). **Useful if `animation.type` is `transition`.
+   * Then animtion Then the animation continues without interruption (See examples on github)**
+   * @default 'restart'
+   */
+  multiClicksHandling: 'block' | 'restart' | 'replaceToState';
 };
 
 const defaultCallback: CoreCallback = () => undefined;
@@ -90,5 +100,6 @@ export function getCoreConfig(options: Partial<CoreConfig>): CoreConfig {
       toStateSet: options.callbacks?.toStateSet || defaultCallback,
       afterEnd: options.callbacks?.afterEnd || defaultCallback,
     },
+    multiClicksHandling: options.multiClicksHandling || 'restart',
   };
 }
