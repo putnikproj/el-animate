@@ -5,7 +5,15 @@
   "description": "Tool for adding enter/leave hardware accelerated animation by controling css clases",
   "main": "./dist/el-animate.umd.js",
   "module": "./dist/el-animate.es.js",
-  "browserslist": "> 2%, not dead",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "browserslist": [
+    "defaults",
+    "ie >= 11"
+  ],
   "files": [
     "dist"
   ],
@@ -34,6 +42,8 @@
     "*": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.18.6",
+    "@rollup/plugin-babel": "^5.3.1",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
     "eslint": "^8.17.0",
@@ -45,6 +55,6 @@
     "lint-staged": "^13.0.2",
     "prettier": "2.7.1",
     "typescript": "^4.7.4",
-    "vite": "^2.9.12"
+    "vite": "^3.0.0-beta.9"
   }
 }
