@@ -79,7 +79,7 @@ export interface Config {
    * Then animtion Then the animation continues without interruption (See examples on github)**
    * @default 'restart'
    */
-  multiClicksHandling: 'block' | 'restart' | 'replaceToState';
+  multiCallHandling: 'block' | 'restart' | 'replaceToState';
 }
 
 const defaultCallback: Callback = () => undefined;
@@ -103,6 +103,6 @@ export function getConfig(options: Partial<Config>): Config {
       toStateSet: options.callbacks?.toStateSet || defaultCallback,
       afterEnd: options.callbacks?.afterEnd || defaultCallback,
     },
-    multiClicksHandling: options.multiClicksHandling || 'restart',
+    multiCallHandling: options.multiCallHandling || 'restart',
   };
 }
