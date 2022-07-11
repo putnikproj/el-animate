@@ -5,7 +5,7 @@ import {
   setAnimationEndInformation,
 } from './animation-end-information';
 import { AnimationType, AnimationTypeUnion } from '../helpers/enum';
-import { CoreConfig } from '../configs/core-config';
+import { Config } from './config';
 
 function getEventName(animationType: AnimationTypeUnion) {
   if (animationType === AnimationType.ANIMATION) {
@@ -32,7 +32,7 @@ function removeAnimationEndEventListener(elem: HTMLElement) {
 
 function addAnimationEndEventListener(
   elem: HTMLElement,
-  animationSettings: CoreConfig['animation'],
+  animationSettings: Config['animation'],
   cb: () => void,
 ) {
   const { name, type } = animationSettings;
@@ -63,7 +63,7 @@ function addAnimationEndEventListener(
 
 export default function createAnimationEndHandler(
   elem: HTMLElement,
-  animationSettings: CoreConfig['animation'],
+  animationSettings: Config['animation'],
   cb: () => void,
 ) {
   removeAnimationEndEventListener(elem);

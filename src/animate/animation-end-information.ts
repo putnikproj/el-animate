@@ -1,4 +1,4 @@
-const ANIMATION_END_HANDLER_PROPERTY = 'elAnimateAnimationEndHandler';
+const ANIMATION_END_HANDLER_PROPERTY = '__elAnimateAnimationEndHandler';
 const ANIMATION_END_PROPERTY_SETTINGS: PropertyDescriptor = {
   configurable: true,
   enumerable: true,

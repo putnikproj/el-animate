@@ -1,8 +1,8 @@
 import { AnimationType, AnimationTypeUnion } from '../helpers/enum';
 
-type CoreCallback = () => void;
+type Callback = () => void;
 
-export type CoreConfig = {
+export interface Config {
   classNames: {
     /**
      * ClassName which element contains before animation starts and should be deleted when animation starts
@@ -34,6 +34,9 @@ export type CoreConfig = {
      */
     final: string;
   };
+  /**
+   * This property is necessary for correct animation end detecting
+   */
   animation: {
     /**
      * When you add animations with css, you can do this either with `transition` or with `animation` property
@@ -53,19 +56,19 @@ export type CoreConfig = {
     /**
      * Called before animation start, element has `initial` classname
      */
-    beforeStart: CoreCallback;
+    beforeStart: Callback;
     /**
      * Called when animation initialized: element has `from` classname, animation end handling added
      */
-    fromStateSet: CoreCallback;
+    fromStateSet: Callback;
     /**
      * Called when element has `to` classname
      */
-    toStateSet: CoreCallback;
+    toStateSet: Callback;
     /**
      * Called when animation ended, element has `final` classname
      */
-    afterEnd: CoreCallback;
+    afterEnd: Callback;
   };
   /**
    * You can set what should el-animate do, if new animate function called, but the element is currently animating
@@ -77,11 +80,11 @@ export type CoreConfig = {
    * @default 'restart'
    */
   multiClicksHandling: 'block' | 'restart' | 'replaceToState';
-};
+}
 
-const defaultCallback: CoreCallback = () => undefined;
+const defaultCallback: Callback = () => undefined;
 
-export function getCoreConfig(options: Partial<CoreConfig>): CoreConfig {
+export function getConfig(options: Partial<Config>): Config {
   return {
     classNames: {
       initial: options.classNames?.initial || '',

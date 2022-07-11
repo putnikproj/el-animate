@@ -33,6 +33,7 @@ export default defineConfig({
       ],
       output: {
         generatedCode: 'es5',
+        exports: 'named',
       },
     },
   },
