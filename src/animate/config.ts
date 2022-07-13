@@ -5,6 +5,17 @@ type Callback = () => void;
 export interface Config {
   classNames: {
     /**
+     * If you specify prefix, all classnames will automatically be generated with this prefix.
+     * *You can overwrite any prefixed classname, if you specify it (including that case, when you specify empty classname).*
+     * @example
+     * prefix: 'animation',
+     * classnames.initial: 'animation-initial',
+     * classnames.from: 'animation-from'...
+     * @default
+     * undefined
+     */
+    prefix?: string;
+    /**
      * ClassName which element contains before animation starts and should be deleted when animation starts
      * @default ''
      */
@@ -85,13 +96,16 @@ export interface Config {
 const defaultCallback: Callback = () => undefined;
 
 export function getConfig(options: Partial<Config>): Config {
+  const prefix = options.classNames?.prefix;
+
   return {
+    // prettier-ignore
     classNames: {
-      initial: options.classNames?.initial || '',
-      from: options.classNames?.from || '',
-      active: options.classNames?.active || '',
-      to: options.classNames?.to || '',
-      final: options.classNames?.final || '',
+      initial: options.classNames?.initial || (prefix ? `${prefix}-initial` : ''),
+      from:    options.classNames?.from    || (prefix ? `${prefix}-from`    : ''),
+      active:  options.classNames?.active  || (prefix ? `${prefix}-active`  : ''),
+      to:      options.classNames?.to      || (prefix ? `${prefix}-to`      : ''),
+      final:   options.classNames?.final   || (prefix ? `${prefix}-final`   : ''),
     },
     animation: {
       type: options.animation?.type || AnimationType.TRANSITION,
