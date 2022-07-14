@@ -1,9 +1,9 @@
 import {
   AnimationEndEvent,
-  clearAnimationEndInformation,
-  getAnimationEndInformation,
-  setAnimationEndInformation,
-} from './animation-end-information';
+  clearAnimationInformation,
+  getAnimationInformation,
+  setAnimationInformation,
+} from './animation-information';
 import { AnimationType, AnimationTypeUnion } from '../helpers/enum';
 import { Config } from './config';
 
@@ -19,24 +19,20 @@ function getEventName(animationType: AnimationTypeUnion) {
   throw new Error('Incorrect animationType setting');
 }
 
-function removeAnimationEndEventListener(elem: HTMLElement) {
-  const eventListener = getAnimationEndInformation(elem);
+export function removeAnimationEndEventListener(elem: HTMLElement) {
+  const animationInfo = getAnimationInformation(elem);
 
-  if (!eventListener) {
+  if (!animationInfo) {
     return;
   }
 
-  elem.removeEventListener(eventListener.eventName, eventListener.handler);
-  clearAnimationEndInformation(elem);
+  elem.removeEventListener(animationInfo.eventName, animationInfo.handler);
+  clearAnimationInformation(elem);
 }
 
-function addAnimationEndEventListener(
-  elem: HTMLElement,
-  animationSettings: Config['animation'],
-  cb: () => void,
-) {
-  const { name, type } = animationSettings;
-  const eventName = getEventName(type);
+function addAnimationEndEventListener(elem: HTMLElement, config: Config, cb: () => void) {
+  const { animation, classNames } = config;
+  const eventName = getEventName(animation.type);
 
   const baseHandler = () => {
     cb();
@@ -45,7 +41,7 @@ function addAnimationEndEventListener(
 
   const cssAnimationHandler = (evt: AnimationEvent) => {
     // If user specified animation name, we should call cb only if event refers to the right animation
-    if (evt.animationName && name && evt.animationName !== name) {
+    if (evt.animationName && animation.name && evt.animationName !== animation.name) {
       return;
     }
 
@@ -53,19 +49,19 @@ function addAnimationEndEventListener(
   };
 
   const handler = (evt: TransitionEvent | AnimationEvent) =>
-    animationSettings.type === AnimationType.ANIMATION
+    animation.type === AnimationType.ANIMATION
       ? cssAnimationHandler(evt as AnimationEvent)
       : baseHandler();
 
   elem.addEventListener(eventName, handler);
-  setAnimationEndInformation(elem, handler, eventName);
+  setAnimationInformation(elem, { handler, classNames, eventName });
 }
 
 export default function createAnimationEndHandler(
   elem: HTMLElement,
-  animationSettings: Config['animation'],
+  config: Config,
   cb: () => void,
 ) {
   removeAnimationEndEventListener(elem);
-  addAnimationEndEventListener(elem, animationSettings, cb);
+  addAnimationEndEventListener(elem, config, cb);
 }

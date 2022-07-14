@@ -1,3 +1,5 @@
+import { Config } from './config';
+
 const ANIMATION_END_HANDLER_PROPERTY = '__elAnimateAnimationEndHandler';
 const ANIMATION_END_PROPERTY_SETTINGS: PropertyDescriptor = {
   configurable: true,
@@ -7,29 +9,29 @@ const ANIMATION_END_PROPERTY_SETTINGS: PropertyDescriptor = {
 
 type AnimationEndHandler = (evt: AnimationEvent | TransitionEvent) => void;
 
+type AnimationInformation = {
+  handler: AnimationEndHandler;
+  eventName: AnimationEndEvent;
+  classNames: Config['classNames'];
+};
+
 export enum AnimationEndEvent {
   TRANSITION = 'transitionend',
   ANIMATION = 'animationend',
 }
 
-export function setAnimationEndInformation(
-  elem: HTMLElement,
-  handler: AnimationEndHandler,
-  eventName: AnimationEndEvent,
-) {
+export function setAnimationInformation(elem: HTMLElement, information: AnimationInformation) {
   Object.defineProperty(elem, ANIMATION_END_HANDLER_PROPERTY, {
-    value: { handler, eventName },
+    value: information,
     ...ANIMATION_END_PROPERTY_SETTINGS,
   });
 }
 
-export function getAnimationEndInformation(
-  elem: HTMLElement,
-): { handler: AnimationEndHandler; eventName: AnimationEndEvent } | undefined {
+export function getAnimationInformation(elem: HTMLElement): AnimationInformation | undefined {
   return Object.getOwnPropertyDescriptor(elem, ANIMATION_END_HANDLER_PROPERTY)?.value;
 }
 
-export function clearAnimationEndInformation(elem: HTMLElement) {
+export function clearAnimationInformation(elem: HTMLElement) {
   Object.defineProperty(elem, ANIMATION_END_HANDLER_PROPERTY, {
     value: undefined,
     ...ANIMATION_END_PROPERTY_SETTINGS,

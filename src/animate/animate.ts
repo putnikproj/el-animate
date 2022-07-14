@@ -15,7 +15,7 @@ export default function animate(elem: HTMLElement, userConfig: Partial<Config>) 
 
   // It's easier to handle 'replaceToState' separately
   if (config.multiCallHandling === 'replaceToState' && getAnimationStatus(elem) === 'animating') {
-    createAnimationEndHandler(elem, config.animation, () => {
+    createAnimationEndHandler(elem, config, () => {
       setFinalState(elem, config.classNames);
       config.callbacks.afterEnd(elem, config);
     });
@@ -32,7 +32,7 @@ export default function animate(elem: HTMLElement, userConfig: Partial<Config>) 
   // Animation start, 1st frame, adding animation end handling
   setFromState(elem, config.classNames);
 
-  createAnimationEndHandler(elem, config.animation, () => {
+  createAnimationEndHandler(elem, config, () => {
     setFinalState(elem, config.classNames);
     config.callbacks.afterEnd(elem, config);
   });

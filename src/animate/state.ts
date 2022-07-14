@@ -28,3 +28,11 @@ export function setFinalState(elem: HTMLElement, classNames: Config['classNames'
 
   clearAnimationStatus(elem);
 }
+
+export function setIdleState(elem: HTMLElement, classNames: Config['classNames']) {
+  const { initial, from, active, to, final } = classNames;
+
+  cl.remove(elem, initial, from, active, to, final);
+
+  clearAnimationStatus(elem);
+}

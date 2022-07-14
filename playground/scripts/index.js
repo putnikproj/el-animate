@@ -1,5 +1,5 @@
 /* eslint-disable no-return-assign */
-import ElAnimate from '../../src';
+import animate, { cancelAnimation } from '../../src';
 
 // Buttons
 // const changeButton = document.querySelector('.change-button');
@@ -93,7 +93,12 @@ const animateTarget = document.querySelector('.animate-block');
 // removeButton.addEventListener('click', removeButtonClickHandler);
 
 animateTarget.addEventListener('click', () => {
-  ElAnimate(animateTarget, {
+  if (animateTarget.dataset.elAnimateStatus) {
+    cancelAnimation(animateTarget);
+    return;
+  }
+
+  animate(animateTarget, {
     classNames: {
       to: 'animation-to',
       final: 'animation-to',
@@ -104,7 +109,7 @@ animateTarget.addEventListener('click', () => {
 });
 
 target.addEventListener('click', () => {
-  ElAnimate(target, {
+  animate(target, {
     classNames: {
       prefix: 'enter',
     },
