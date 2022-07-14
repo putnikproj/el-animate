@@ -17,31 +17,31 @@ export default function animate(elem: HTMLElement, userConfig: Partial<Config>) 
   if (config.multiCallHandling === 'replaceToState' && getAnimationStatus(elem) === 'animating') {
     createAnimationEndHandler(elem, config.animation, () => {
       setFinalState(elem, config.classNames);
-      config.callbacks.afterEnd();
+      config.callbacks.afterEnd(elem, config);
     });
 
     setToState(elem, config.classNames);
-    config.callbacks.toStateSet();
+    config.callbacks.toStateSet(elem, config);
 
     return;
   }
 
   // Before animation started
-  config.callbacks.beforeStart();
+  config.callbacks.beforeStart(elem, config);
 
   // Animation start, 1st frame, adding animation end handling
   setFromState(elem, config.classNames);
 
   createAnimationEndHandler(elem, config.animation, () => {
     setFinalState(elem, config.classNames);
-    config.callbacks.afterEnd();
+    config.callbacks.afterEnd(elem, config);
   });
 
-  config.callbacks.fromStateSet();
+  config.callbacks.fromStateSet(elem, config);
 
   // 2nd frame, switching 'from' -> 'to' classname
   nextFrame(() => {
     setToState(elem, config.classNames);
-    config.callbacks.toStateSet();
+    config.callbacks.toStateSet(elem, config);
   });
 }

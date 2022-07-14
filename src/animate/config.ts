@@ -1,6 +1,6 @@
 import { AnimationType, AnimationTypeUnion } from '../helpers/enum';
 
-type Callback = () => void;
+type Callback = (elem: HTMLElement, currentConfig: Config) => void;
 
 export interface Config {
   classNames: {
