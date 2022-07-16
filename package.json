@@ -1,10 +1,37 @@
 {
   "name": "el-animate",
-  "version": "0.0.1",
-  "private": true,
-  "description": "Tool for adding enter/leave hardware accelerated animation by controling css clases",
+  "version": "1.0.0",
+  "description": "Easily animate html elements using css and control it with js",
+  "homepage": "https://github.com/putnik-projects/el-animate",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/putnik-projects/el-animate"
+  },
+  "bugs": "https://github.com/putnik-projects/el-animate/issues",
+  "keywords": [
+    "css",
+    "animation",
+    "transition",
+    "css-animation",
+    "animate",
+    "transform",
+    "dom"
+  ],
+  "author": "Nikita Putilin <22.pn.sp@gmail.com> (https://github.com/putnik-projects)",
+  "license": "MIT",
   "main": "./dist/el-animate.umd.js",
   "module": "./dist/el-animate.es.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/el-animate.es.js",
+      "require": "./dist/el-animate.umd.js"
+    }
+  },
   "babel": {
     "presets": [
       "@babel/preset-env"
@@ -14,16 +41,6 @@
     "defaults",
     "ie >= 11"
   ],
-  "files": [
-    "dist"
-  ],
-  "exports": {
-    ".": {
-      "import": "./dist/el-animate.es.js",
-      "require": "./dist/el-animate.umd.js"
-    }
-  },
-  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc --emitDeclarationOnly",
@@ -31,11 +48,9 @@
     "lint:fix": "eslint . --fix",
     "type-check": "tsc --noEmit",
     "format": "prettier . --write",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepublishOnly": "npm run type-check && npm run format && npm run lint && npm run build"
   },
-  "keywords": [],
-  "author": "Nikita Putilin",
-  "license": "ISC",
   "lint-staged": {
     "*.{js,ts}": "eslint --cache",
     "*.ts": "bash -c tsc --noEmit",
