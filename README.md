@@ -8,7 +8,7 @@
 
 ElAnimate is a small, lightweight, cross-browser TypeScript library-helper, that helpes to create simple HTML-element animations described in CSS with transition or animation property, but controlled in JavaScipt by changing classNames. This combination allows creating hardware accelerated native css animations with best performance and smoothness on the one hand, but provides simplicity and convenience on the other hand.
 
-This library is also very useful for enter/leave animations (see demo). Without this library it is very hard to animate element first and only then delete it from DOM (for example, animated burger menu, or backdrop).
+This library is also very useful for enter/leave animations. Without this library it is very hard to animate element first and only then delete it from DOM (for example, animated burger menu, or backdrop).
 
 > Note: this library is intended for simple animations from one point to another. If you want to create complicated animations with different timings or something like this, you should use libraries where you describe and controll everything in in JavaScript.
 
@@ -19,6 +19,8 @@ This library is also very useful for enter/leave animations (see demo). Without 
 - **Fully typed**: This package is written in TypeScript, every config option has type, and JSDoc annotations
 - **Very wide range of browser support**: IE10+ can understand the code
 - **Library Independent**: ElAnimate has no dependences and doesn't require any library like JQuery
+
+**[Demos](https://codepen.io/collection/warqKo?grid_type=list)**
 
 ## Installation
 
@@ -199,19 +201,9 @@ And then of course you should configure classnames and other parameters in JavaS
 
 Also, if in some moment you need to cancel animation and return it to initial point, this is a special function: `ElAnimate.cancelAnimation(elem)`
 
-## Demos (on codepen.io)
+## Demos
 
-### Basic usage
-
-- [Animating opacity + block multi-calls (using css transition)](https://codepen.io/putnik-projects/pen/LYdxdJw)
-- [Animating translate with saving state + using callbacks (using css transition)](https://codepen.io/putnik-projects/pen/OJvWQyr)
-- [Advanced animation (using css animation)](https://codepen.io/putnik-projects/pen/rNdjJWM)
-- [Several animations on a single element (using css animation + transition)](https://codepen.io/putnik-projects/pen/poLRLQL)
-
-### Enter/leave
-
-- [Translate enter/leave animation (block multi-calls)](https://codepen.io/putnik-projects/pen/PoRWRgp)
-- [Enter/leave animation the same in both direction + callbacks for display none](https://codepen.io/putnik-projects/pen/oNqBdLb)
+All demos are available [here on codepen.io](https://codepen.io/collection/warqKo?grid_type=list)
 
 ## Build
 
