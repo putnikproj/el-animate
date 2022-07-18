@@ -6,6 +6,7 @@ import {
 } from './animation-information';
 import { AnimationType, AnimationTypeUnion } from '../helpers/enum';
 import { Config } from './config';
+import { setIdleState } from './state';
 
 function getEventName(animationType: AnimationTypeUnion) {
   if (animationType === AnimationType.ANIMATION) {
@@ -27,6 +28,7 @@ export function removeAnimationEndEventListener(elem: HTMLElement) {
   }
 
   elem.removeEventListener(animationInfo.eventName, animationInfo.handler);
+  setIdleState(elem, animationInfo.classNames);
   clearAnimationInformation(elem);
 }
 
@@ -35,8 +37,8 @@ function addAnimationEndEventListener(elem: HTMLElement, config: Config, cb: () 
   const eventName = getEventName(animation.type);
 
   const baseHandler = () => {
-    cb();
     removeAnimationEndEventListener(elem);
+    cb();
   };
 
   const cssAnimationHandler = (evt: AnimationEvent) => {
