@@ -108,7 +108,7 @@ And then of course you should configure classnames and other parameters in JavaS
 {
   classNames: {
     /**
-     * If you specify prefix, all classnames will automatically be generated with this prefix.
+     * If you specify prefix, all classnames except `final` will automatically be generated with this prefix.
      * *You can overwrite any prefixed classname, if you specify it (including that case, when you specify empty classname).*
      * @example
      * prefix: 'animation',

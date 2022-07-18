@@ -5,7 +5,7 @@ type Callback = (elem: HTMLElement, currentConfig: Config) => void;
 export interface Config {
   classNames: {
     /**
-     * If you specify prefix, all classnames will automatically be generated with this prefix.
+     * If you specify prefix, all classnames except `final` will automatically be generated with this prefix.
      * *You can overwrite any prefixed classname, if you specify it (including that case, when you specify empty classname).*
      * @example
      * prefix: 'animation',
@@ -105,7 +105,7 @@ export function getConfig(options: Partial<Config>): Config {
       from:    options.classNames?.from    || (prefix ? `${prefix}-from`    : ''),
       active:  options.classNames?.active  || (prefix ? `${prefix}-active`  : ''),
       to:      options.classNames?.to      || (prefix ? `${prefix}-to`      : ''),
-      final:   options.classNames?.final   || (prefix ? `${prefix}-final`   : ''),
+      final:   options.classNames?.final   || '',
     },
     animation: {
       type: options.animation?.type || AnimationType.TRANSITION,
