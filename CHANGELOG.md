@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+- Adds default 'both' property to 'animation.type'
+
 ## 1.1.0
 
 - Fixes `multiCallHandling` ('restart' and 'replaceToState' work as they should now)
