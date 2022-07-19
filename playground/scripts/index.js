@@ -47,11 +47,28 @@ changeStateButton.addEventListener('click', () => {
       },
       multiCallHandling: 'replaceToState',
     });
+    animate(target, {
+      classNames: {
+        prefix: 'enter',
+        initial: 'hidden',
+      },
+      animation: {
+        type: 'animation',
+      },
+      multiCallHandling: 'replaceToState',
+    });
 
     return;
   }
 
   animate(transitionBlock, {
+    classNames: {
+      prefix: 'leave',
+      final: 'hidden',
+    },
+    multiCallHandling: 'replaceToState',
+  });
+  animate(target, {
     classNames: {
       prefix: 'leave',
       final: 'hidden',

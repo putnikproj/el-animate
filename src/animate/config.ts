@@ -1,4 +1,4 @@
-import { AnimationType, AnimationTypeUnion } from '../helpers/enum';
+import { AnimationTypeUnion } from '../helpers/enum';
 
 type Callback = (elem: HTMLElement, currentConfig: Config) => void;
 
@@ -29,7 +29,7 @@ export interface Config {
     /**
      * ClassName which element contains during the whole animation.
      * Usually there you write `animation` or `transition` css properties.
-     * (on: 1st or 2nd frame, off: last frame)
+     * (on: 1st frame, off: last frame)
      * @default ''
      */
     active: string;
@@ -51,14 +51,15 @@ export interface Config {
   animation: {
     /**
      * When you add animations with css, you can do this either with `transition` or with `animation` property
-     * You should choose one of this for correct animation end detecting.
-     * *If you have problems with detecting animation end, see `animation.end`*
-     * @default 'transition'
+     * By default ElAnimate adds both `transitionend` and `animationend` handlers
+     * You should choose one of this for correct animation end detecting if you have problems.
+     * As a last resort, you can set `animation.name`
+     * @default 'both'
      */
-    type: AnimationTypeUnion;
+    type: AnimationTypeUnion | 'both';
     /**
      * if you have several animation, you can additionally set `animation.name` field in config
-     * Then el-animate can properly detect animation end with this animation name.
+     * Then ElAnimate can properly detect animation end with this animation name.
      * You should type the same string as in @keyframes
      */
     name: string | undefined;
@@ -87,7 +88,7 @@ export interface Config {
    * - `restart` means that we should stop current animation and start the new one
    * - `replaceToState` means that we only replace final points of animation
    * (el-animate replaces `to` className and animation end handler). **Useful if `animation.type` is `transition`.
-   * Then animtion Then the animation continues without interruption (See examples on github)**
+   * Then the animation continues without interruption (See examples on github)**
    * @default 'restart'
    */
   multiCallHandling: 'block' | 'restart' | 'replaceToState';
@@ -108,7 +109,7 @@ export function getConfig(options: Partial<Config>): Config {
       final:   options.classNames?.final   || '',
     },
     animation: {
-      type: options.animation?.type || AnimationType.TRANSITION,
+      type: options.animation?.type || 'both',
       name: options.animation?.name,
     },
     callbacks: {

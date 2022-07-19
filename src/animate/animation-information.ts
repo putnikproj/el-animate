@@ -9,9 +9,13 @@ const ANIMATION_END_PROPERTY_SETTINGS: PropertyDescriptor = {
 
 type AnimationEndHandler = (evt: AnimationEvent | TransitionEvent) => void;
 
-type AnimationInformation = {
-  handler: AnimationEndHandler;
+type EventListenerHandler = {
+  function: AnimationEndHandler;
   eventName: AnimationEndEvent;
+};
+
+type AnimationInformation = {
+  handlers: EventListenerHandler[];
   classNames: Config['classNames'];
 };
 

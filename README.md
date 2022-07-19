@@ -119,7 +119,7 @@ And then of course you should configure classnames and other parameters in JavaS
      * @default
      * undefined
      */
-    prefix?: string;
+    prefix: string;
     /**
      * ClassName which element contains before animation starts and should be deleted when animation starts
      * @default ''
@@ -134,7 +134,7 @@ And then of course you should configure classnames and other parameters in JavaS
     /**
      * ClassName which element contains during the whole animation.
      * Usually there you write `animation` or `transition` css properties.
-     * (on: 1st or 2nd frame, off: last frame)
+     * (on: 1st frame, off: last frame)
      * @default ''
      */
     active: string;
@@ -156,14 +156,15 @@ And then of course you should configure classnames and other parameters in JavaS
   animation: {
     /**
      * When you add animations with css, you can do this either with `transition` or with `animation` property
-     * You should choose one of this for correct animation end detecting.
-     * *If you have problems with detecting animation end, see `animation.end`*
-     * @default 'transition'
+     * You should choose one of this for correct animation end detecting if you have problems.
+     * By default ElAnimate adds both `transitionend` and `animationend` handlers
+     * As a last resort, you can set `animation.name`
+     * @default 'both'
      */
-    type: 'transition' | 'animation';
+    type: 'transition' | 'animation' | 'both';
     /**
      * if you have several animation, you can additionally set `animation.name` field in config
-     * Then el-animate can properly detect animation end with this animation name.
+     * Then ElAnimate can properly detect animation end with this animation name.
      * You should type the same string as in @keyframes
      */
     name: string | undefined;
@@ -192,7 +193,7 @@ And then of course you should configure classnames and other parameters in JavaS
    * - `restart` means that we should stop current animation and start the new one
    * - `replaceToState` means that we only replace final points of animation
    * (el-animate replaces `to` className and animation end handler). **Useful if `animation.type` is `transition`.
-   * Then animtion Then the animation continues without interruption**
+   * Then the animation continues without interruption**
    * @default 'restart'
    */
   multiCallHandling: 'block' | 'restart' | 'replaceToState';
@@ -203,7 +204,7 @@ Also, if in some moment you need to cancel animation and return it to initial po
 
 ## Demos
 
-All demos are available [here on codepen.io](https://codepen.io/collection/warqKo?grid_type=list)
+All demos are available [here on codepen.io](https://codepen.io/collection/warqKo?grid_type=list). We highly recommend to view them.
 
 ## Build
 
