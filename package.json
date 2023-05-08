@@ -43,7 +43,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc --emitDeclarationOnly",
+    "build": "vite build && tsup ./src/index.ts --dts-only",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "type-check": "tsc --noEmit",
@@ -70,6 +70,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "prettier": "2.8.8",
+    "tsup": "^6.7.0",
     "typescript": "^5.0.4",
     "vite": "^4.3.5"
   }
