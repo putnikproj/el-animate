@@ -19,6 +19,7 @@
   ],
   "author": "Nikita Putilin <22.pn.sp@gmail.com> (https://github.com/putnik-projects)",
   "license": "MIT",
+  "type": "module",
   "main": "./dist/el-animate.umd.js",
   "module": "./dist/el-animate.es.js",
   "types": "./dist/index.d.ts",
@@ -38,8 +39,7 @@
     ]
   },
   "browserslist": [
-    "defaults",
-    "ie >= 11"
+    "defaults"
   ],
   "scripts": {
     "dev": "vite",

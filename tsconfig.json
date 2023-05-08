@@ -4,7 +4,7 @@
     "target": "ES2015",
 
     /* Modules */
-    "module": "commonjs",
+    "module": "ES2015",
     "rootDir": "./src",
     "baseUrl": "./",
 

@@ -17,7 +17,6 @@ This library is also very useful for enter/leave animations. Without this librar
 - **Lightweight**: ~1.5KB minified & gziped
 - **Simple**: ElAnimate exports only `animate` and `cancelAnimation` functions, has a few config options
 - **Fully typed**: This package is written in TypeScript, every config option has type, and JSDoc annotations
-- **Very wide range of browser support**: IE10+ can understand the code
 - **Library Independent**: ElAnimate has no dependences and doesn't require any library like JQuery
 
 **[Demos](https://codepen.io/collection/warqKo?grid_type=list)**

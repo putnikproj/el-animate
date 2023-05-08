@@ -17,7 +17,7 @@ export default defineConfig({
       name: LIB_NAME_CAMEL,
       fileName: (format) => {
         if (format === 'cjs') {
-          return `${LIB_NAME}.js`;
+          return `${LIB_NAME}.cjs`;
         }
 
         return `${LIB_NAME}.${format}.js`;
@@ -32,7 +32,6 @@ export default defineConfig({
         }),
       ],
       output: {
-        generatedCode: 'es5',
         exports: 'named',
       },
     },
