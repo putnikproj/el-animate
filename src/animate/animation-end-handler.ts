@@ -5,7 +5,7 @@ import {
   setAnimationInformation,
 } from './animation-information';
 import { AnimationType, AnimationTypeUnion } from '../helpers/enum';
-import { Config } from './config';
+import { ResolvedConfig } from './config';
 import { setIdleState } from './state';
 
 function getEventName(animationType: AnimationTypeUnion) {
@@ -34,7 +34,7 @@ export function removeAnimationEndEventListener(elem: HTMLElement) {
   clearAnimationInformation(elem);
 }
 
-function addAnimationEndEventListener(elem: HTMLElement, config: Config, cb: () => void) {
+function addAnimationEndEventListener(elem: HTMLElement, config: ResolvedConfig, cb: () => void) {
   const { animation, classNames } = config;
   // Create handlers
   const baseHandler = () => {
@@ -92,7 +92,7 @@ function addAnimationEndEventListener(elem: HTMLElement, config: Config, cb: () 
 
 export default function createAnimationEndHandler(
   elem: HTMLElement,
-  config: Config,
+  config: ResolvedConfig,
   cb: () => void,
 ) {
   removeAnimationEndEventListener(elem);

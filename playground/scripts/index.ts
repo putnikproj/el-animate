@@ -1,11 +1,11 @@
 /* eslint-disable no-return-assign */
-import animate, { cancelAnimation } from '../../src';
+import { animate, cancelAnimation } from '../../src';
 
-const changeStateButton = document.querySelector('.change-button');
+const changeStateButton = document.querySelector('.change-button') as HTMLButtonElement;
 
-const target = document.querySelector('.block');
-const transitionBlock = document.querySelector('.block2');
-const animateTarget = document.querySelector('.animate-block');
+const target = document.querySelector('.block') as HTMLDivElement;
+const transitionBlock = document.querySelector('.block2') as HTMLDivElement;
+const animateTarget = document.querySelector('.animate-block') as HTMLDivElement;
 
 animateTarget.addEventListener('click', () => {
   if (animateTarget.dataset.elAnimateStatus) {
@@ -19,7 +19,7 @@ animateTarget.addEventListener('click', () => {
       final: 'animation-to final-state',
       active: 'animation-active',
     },
-    multiClicksHandling: 'replaceToState',
+    multiCallHandling: 'replaceToState',
   });
 });
 

@@ -1,8 +1,8 @@
 import cl from '../helpers/class-list';
-import { Config } from './config';
+import { ResolvedConfig } from './config';
 import { clearAnimationStatus, setAnimationStatus, AnimationStatus } from './animation-status';
 
-export function setFromState(elem: HTMLElement, classNames: Config['classNames']) {
+export function setFromState(elem: HTMLElement, classNames: ResolvedConfig['classNames']) {
   const { initial, from, active, to, final } = classNames;
 
   cl.remove(elem, initial, active, to, final);
@@ -11,7 +11,7 @@ export function setFromState(elem: HTMLElement, classNames: Config['classNames']
   setAnimationStatus(elem, AnimationStatus.START);
 }
 
-export function setToState(elem: HTMLElement, classNames: Config['classNames']) {
+export function setToState(elem: HTMLElement, classNames: ResolvedConfig['classNames']) {
   const { initial, from, active, to, final } = classNames;
 
   cl.remove(elem, initial, from, final);
@@ -20,7 +20,7 @@ export function setToState(elem: HTMLElement, classNames: Config['classNames']) 
   setAnimationStatus(elem, AnimationStatus.ANIMATING);
 }
 
-export function setFinalState(elem: HTMLElement, classNames: Config['classNames']) {
+export function setFinalState(elem: HTMLElement, classNames: ResolvedConfig['classNames']) {
   const { initial, from, active, to, final } = classNames;
 
   cl.remove(elem, initial, from, active, to);
@@ -29,7 +29,7 @@ export function setFinalState(elem: HTMLElement, classNames: Config['classNames'
   clearAnimationStatus(elem);
 }
 
-export function setIdleState(elem: HTMLElement, classNames: Config['classNames']) {
+export function setIdleState(elem: HTMLElement, classNames: ResolvedConfig['classNames']) {
   const { initial, from, active, to, final } = classNames;
 
   cl.remove(elem, initial, from, active, to, final);

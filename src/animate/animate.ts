@@ -1,11 +1,11 @@
-import { Config, getConfig } from './config';
+import { ElAnimateOptions, getConfig } from './config';
 import { nextFrame } from '../helpers/utils';
-
-import createAnimationEndHandler from './animation-end-handler';
 import { getAnimationStatus } from './animation-status';
 import { setFinalState, setFromState, setToState } from './state';
 
-export default function animate(elem: HTMLElement, userConfig: Partial<Config>) {
+import createAnimationEndHandler from './animation-end-handler';
+
+export default function animate(elem: HTMLElement, userConfig: ElAnimateOptions) {
   const config = getConfig(userConfig);
 
   // Don't execute animation function, if we should block multiClick

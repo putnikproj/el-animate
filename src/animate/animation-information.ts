@@ -1,4 +1,4 @@
-import { Config } from './config';
+import { ResolvedConfig } from './config';
 
 const ANIMATION_END_HANDLER_PROPERTY = '__elAnimateAnimationEndHandler';
 const ANIMATION_END_PROPERTY_SETTINGS: PropertyDescriptor = {
@@ -16,7 +16,7 @@ type EventListenerHandler = {
 
 type AnimationInformation = {
   handlers: EventListenerHandler[];
-  classNames: Config['classNames'];
+  classNames: ResolvedConfig['classNames'];
 };
 
 export enum AnimationEndEvent {
