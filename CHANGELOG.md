@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+
+- Adds possibility to apply multiple classnames to transitions
+
 ## 1.2.0
 
 - Adds default 'both' property to 'animation.type'
