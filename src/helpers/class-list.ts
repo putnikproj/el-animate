@@ -1,16 +1,15 @@
 const cl = {
-  has: (elem: HTMLElement, className: string) => elem.classList.contains(className),
   add: (elem: HTMLElement, ...classNames: string[]) => {
     classNames.forEach((className) => {
       if (className.length !== 0) {
-        elem.classList.add(className);
+        elem.classList.add(...className.split(' '));
       }
     });
   },
   remove: (elem: HTMLElement, ...classNames: string[]) => {
     classNames.forEach((className) => {
       if (className.length !== 0) {
-        elem.classList.remove(className);
+        elem.classList.remove(...className.split(' '));
       }
     });
   },

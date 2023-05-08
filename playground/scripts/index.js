@@ -16,7 +16,7 @@ animateTarget.addEventListener('click', () => {
   animate(animateTarget, {
     classNames: {
       to: 'animation-to',
-      final: 'animation-to',
+      final: 'animation-to final-state',
       active: 'animation-active',
     },
     multiClicksHandling: 'replaceToState',
