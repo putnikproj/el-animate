@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0
+
+- Improves config resolving
+- Better generated types
+- Dropped IE11 support
+
 ## 1.2.1
 
 - Adds possibility to apply multiple classnames to transitions
